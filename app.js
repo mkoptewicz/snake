@@ -16,12 +16,18 @@ function createGrid() {
     cells.push(cell);
   }
 }
-createGrid();
-snake.forEach(index => cells[index].classList.add("snake"));
+
+function createApple() {
+  const randomNumber = Math.floor(Math.random() * 100);
+  do {
+    cells[randomNumber].classList.add("apple");
+  } while (cells[randomNumber].classList.contains("snake"));
+}
+
 let intervalId = setInterval(moveSnake, speed);
 function moveSnake() {
   if (
-    (direction === 1 && snake[0]% width === 9) ||
+    (direction === 1 && snake[0] % width === 9) ||
     (direction === -1 && snake[0] % width === 0) ||
     (direction === width && snake[0] + width >= 100) ||
     (direction === -width && snake[0] - width < 0) ||
@@ -42,3 +48,6 @@ function controlSnake(e) {
   else if (e.key === "ArrowUp") direction = -width;
 }
 document.addEventListener("keydown", controlSnake);
+createGrid();
+snake.forEach(index => cells[index].classList.add("snake"));
+createApple();
