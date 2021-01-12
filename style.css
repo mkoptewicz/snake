@@ -32,3 +32,8 @@ h1 {
 .apple {
  background-color: red;
 }
+.start {
+ margin-top: 3rem;
+ padding: 1rem 2rem;
+ font-size: 20px;
+}
