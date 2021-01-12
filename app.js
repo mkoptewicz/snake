@@ -5,6 +5,8 @@ let snake = [2, 1, 0];
 let direction = 1;
 let snakeTail = 0;
 const width = 10;
+let speedRatio = 0.9;
+let speed = 300;
 
 function createGrid() {
   for (let i = 0; i < 100; i++) {
@@ -16,20 +18,22 @@ function createGrid() {
 }
 createGrid();
 snake.forEach(index => cells[index].classList.add("snake"));
-let intervalId = setInterval(moveSnake, 500);
+let intervalId = setInterval(moveSnake, speed);
 function moveSnake() {
   if (
-    (direction === 1 && snake[0] % 9 === 0) ||
-    (direction === -1 && snake[0] % 10 === 0) ||
-    (direction === width && snake[0] + width > 100) ||
+    (direction === 1 && snake[0]% width === 9) ||
+    (direction === -1 && snake[0] % width === 0) ||
+    (direction === width && snake[0] + width >= 100) ||
     (direction === -width && snake[0] - width < 0) ||
     cells[snake[0] + direction].classList.contains("snake")
   )
     return clearInterval(intervalId);
-  snake.unshift(snake[0] + direction);
-  cells[snake[0]].classList.add("snake");
-  snakeTail = snake.pop();
-  cells[snakeTail].classList.remove("snake");
+  else {
+    snake.unshift(snake[0] + direction);
+    cells[snake[0]].classList.add("snake");
+    snakeTail = snake.pop();
+    cells[snakeTail].classList.remove("snake");
+  }
 }
 function controlSnake(e) {
   if (e.key === "ArrowRight") direction = 1;
