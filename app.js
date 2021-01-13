@@ -5,9 +5,10 @@ let snake = [2, 1, 0];
 let direction = 1;
 const width = 10;
 let appleIndex = 0;
-let speedRatio = 0.9;
-let time = 300;
+let speedRatio = 0.95;
+let time = 500;
 let intervalId = 0;
+let score = 0;
 createGrid();
 function init() {
   snake.forEach(index => cells[index].classList.remove("snake"));
@@ -15,6 +16,7 @@ function init() {
   snake = [2, 1, 0];
   direction = 1;
   time = 300;
+  score = 0;
   cells[appleIndex].classList.remove("apple");
   snake.forEach(index => cells[index].classList.add("snake"));
   createApple();
@@ -31,10 +33,10 @@ function createGrid() {
 }
 
 function createApple() {
-  appleIndex = Math.floor(Math.random() * 100);
   do {
-    cells[appleIndex].classList.add("apple");
+    appleIndex = Math.floor(Math.random() * 100);
   } while (cells[appleIndex].classList.contains("snake"));
+  cells[appleIndex].classList.add("apple");
 }
 
 function moveSnake() {
@@ -52,6 +54,7 @@ function moveSnake() {
   cells[snakeTail].classList.remove("snake");
 
   if (cells[snake[0]].classList.contains("apple")) {
+    score++;
     cells[snake[0]].classList.remove("apple");
     cells[snakeTail].classList.add("snake");
     snake.push(snakeTail);
@@ -69,9 +72,6 @@ function controlSnake(e) {
   else if (e.key === "ArrowLeft") direction = -1;
   else if (e.key === "ArrowUp") direction = -width;
 }
-// function reset() {
-//   cells = [];
-// }
 
 document.addEventListener("keydown", controlSnake);
 startBtn.addEventListener("click", init);
