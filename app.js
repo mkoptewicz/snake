@@ -4,11 +4,10 @@ const scoreElement = document.querySelector(".score");
 let cells = [];
 let snake = [2, 1, 0];
 let direction = 1;
-const width = 20;
-document.documentElement.style.setProperty("--size", width * 30 + "px");
+const width = 15;
 let appleIndex = 0;
 let speedRatio = 0.95;
-let time = 500;
+let time = 300;
 let intervalId = 0;
 let score = 0;
 createGrid();
@@ -35,6 +34,7 @@ function onTransitionEnd() {
   scoreElement.classList.add("fade");
 }
 function createGrid() {
+  document.documentElement.style.setProperty("--size", width * 30 + "px");
   for (let i = 0; i < width * width; i++) {
     const cell = document.createElement("div");
     cell.classList.add("cell");
@@ -45,7 +45,7 @@ function createGrid() {
 
 function createApple() {
   do {
-    appleIndex = Math.floor(Math.random() * 100);
+    appleIndex = Math.floor(Math.random() * (width * width));
   } while (cells[appleIndex].classList.contains("snake"));
   cells[appleIndex].classList.add("apple");
 }
@@ -66,15 +66,14 @@ function moveSnake() {
 
   if (cells[snake[0]].classList.contains("apple")) {
     score++;
-    triggerScoreAnimation();
     cells[snake[0]].classList.remove("apple");
     cells[snakeTail].classList.add("snake");
     snake.push(snakeTail);
     createApple();
     clearInterval(intervalId);
     time < 100 ? time : (time *= speedRatio);
-    console.log(time);
     intervalId = setInterval(moveSnake, time);
+    triggerScoreAnimation();
   }
   cells[snake[0]].classList.add("snake");
 }
