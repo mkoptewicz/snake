@@ -1,6 +1,6 @@
 const gameBoard = document.querySelector(".container");
 const startBtn = document.querySelector(".start");
-const scoreElement = document.querySelector(".score")
+const scoreElement = document.querySelector(".score");
 let cells = [];
 let snake = [2, 1, 0];
 let direction = 1;
@@ -18,12 +18,21 @@ function init() {
   direction = 1;
   time = 300;
   score = 0;
+  scoreElement.textContent = score;
   cells[appleIndex].classList.remove("apple");
   snake.forEach(index => cells[index].classList.add("snake"));
   createApple();
   intervalId = setInterval(moveSnake, time);
 }
-
+function triggerScoreAnimation() {
+  scoreElement.removeEventListener("transitionend", onTransitionEnd);
+  scoreElement.addEventListener("transitionend", onTransitionEnd);
+  scoreElement.classList.remove("fade");
+}
+function onTransitionEnd() {
+  scoreElement.textContent = score;
+  scoreElement.classList.add("fade");
+}
 function createGrid() {
   for (let i = 0; i < 100; i++) {
     const cell = document.createElement("div");
@@ -56,7 +65,7 @@ function moveSnake() {
 
   if (cells[snake[0]].classList.contains("apple")) {
     score++;
-    scoreElement.textContent = score
+    triggerScoreAnimation();
     cells[snake[0]].classList.remove("apple");
     cells[snakeTail].classList.add("snake");
     snake.push(snakeTail);
