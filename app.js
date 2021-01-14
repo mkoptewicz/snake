@@ -4,7 +4,8 @@ const scoreElement = document.querySelector(".score");
 let cells = [];
 let snake = [2, 1, 0];
 let direction = 1;
-const width = 10;
+const width = 13;
+document.documentElement.style.setProperty("--size", width*30 + "px");
 let appleIndex = 0;
 let speedRatio = 0.95;
 let time = 500;
@@ -34,7 +35,7 @@ function onTransitionEnd() {
   scoreElement.classList.add("fade");
 }
 function createGrid() {
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < width * width; i++) {
     const cell = document.createElement("div");
     cell.classList.add("cell");
     gameBoard.appendChild(cell);
