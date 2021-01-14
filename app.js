@@ -1,5 +1,6 @@
 const gameBoard = document.querySelector(".container");
 const startBtn = document.querySelector(".start");
+const scoreElement = document.querySelector(".score")
 let cells = [];
 let snake = [2, 1, 0];
 let direction = 1;
@@ -55,6 +56,7 @@ function moveSnake() {
 
   if (cells[snake[0]].classList.contains("apple")) {
     score++;
+    scoreElement.textContent = score
     cells[snake[0]].classList.remove("apple");
     cells[snakeTail].classList.add("snake");
     snake.push(snakeTail);

@@ -41,3 +41,8 @@ h1 {
   padding: 1rem 2rem;
   font-size: 20px;
 }
+.score {
+  margin-top: 2rem ;
+  font-size: 2rem;
+  font-weight: bold;
+}
