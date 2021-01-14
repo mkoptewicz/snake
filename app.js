@@ -4,8 +4,8 @@ const scoreElement = document.querySelector(".score");
 let cells = [];
 let snake = [2, 1, 0];
 let direction = 1;
-const width = 13;
-document.documentElement.style.setProperty("--size", width*30 + "px");
+const width = 20;
+document.documentElement.style.setProperty("--size", width * 30 + "px");
 let appleIndex = 0;
 let speedRatio = 0.95;
 let time = 500;
@@ -19,7 +19,7 @@ function init() {
   direction = 1;
   time = 300;
   score = 0;
-  scoreElement.textContent = score;
+  scoreElement.textContent = `Score: ${score}`;
   cells[appleIndex].classList.remove("apple");
   snake.forEach(index => cells[index].classList.add("snake"));
   createApple();
@@ -31,7 +31,7 @@ function triggerScoreAnimation() {
   scoreElement.classList.remove("fade");
 }
 function onTransitionEnd() {
-  scoreElement.textContent = score;
+  scoreElement.textContent = `Score: ${score}`;
   scoreElement.classList.add("fade");
 }
 function createGrid() {
@@ -52,9 +52,9 @@ function createApple() {
 
 function moveSnake() {
   if (
-    (direction === 1 && snake[0] % width === 9) ||
+    (direction === 1 && snake[0] % width === width - 1) ||
     (direction === -1 && snake[0] % width === 0) ||
-    (direction === width && snake[0] + width >= 100) ||
+    (direction === width && snake[0] + width >= width * width) ||
     (direction === -width && snake[0] - width < 0) ||
     cells[snake[0] + direction].classList.contains("snake")
   )
@@ -72,7 +72,8 @@ function moveSnake() {
     snake.push(snakeTail);
     createApple();
     clearInterval(intervalId);
-    time *= speedRatio;
+    time < 100 ? time : (time *= speedRatio);
+    console.log(time);
     intervalId = setInterval(moveSnake, time);
   }
   cells[snake[0]].classList.add("snake");
