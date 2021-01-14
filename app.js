@@ -7,7 +7,7 @@ let direction = 1;
 const width = 15;
 let appleIndex = 0;
 let speedRatio = 0.95;
-let time = 300;
+let time;
 let intervalId = 0;
 let score = 0;
 createGrid();
@@ -16,7 +16,7 @@ function init() {
   clearInterval(intervalId);
   snake = [2, 1, 0];
   direction = 1;
-  time = 300;
+  time = 100;
   score = 0;
   scoreElement.textContent = `Score: ${score}`;
   cells[appleIndex].classList.remove("apple");
@@ -68,12 +68,14 @@ function moveSnake() {
     score++;
     cells[snake[0]].classList.remove("apple");
     cells[snakeTail].classList.add("snake");
-    snake.push(snakeTail);
     createApple();
+    snake.push(snakeTail);
     clearInterval(intervalId);
-    time < 100 ? time : (time *= speedRatio);
+    // time < 100 ? time : (time *= speedRatio);
+    time *= speedRatio;
     intervalId = setInterval(moveSnake, time);
     triggerScoreAnimation();
+    console.log(time);
   }
   cells[snake[0]].classList.add("snake");
 }
@@ -84,6 +86,10 @@ function controlSnake(e) {
   else if (e.key === "ArrowLeft") direction = -1;
   else if (e.key === "ArrowUp") direction = -width;
 }
+function enterHandler(e) {
+  if (e.key === "Enter") init();
+}
 
 document.addEventListener("keydown", controlSnake);
 startBtn.addEventListener("click", init);
+document.addEventListener("keydown", enterHandler);
