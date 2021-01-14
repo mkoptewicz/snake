@@ -4,13 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Snake game</title>
-    <link rel="stylesheet" href="style.css" />
     <link rel="shortcut icon" type="image/jpg" href="images/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Henny+Penny&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
     <script src="app.js" defer></script>
   </head>
   <body>
-    <h1>Snake game</h1>
-    <div class="container"></div>
+    <h1>Snake</h1>
+    <div class="board-wrapper">
+      <img src="images/snake.png" alt="" />
+      <div class="container"></div>
+      <div class="settings"></div>
+    </div>
     <p class="score fade">Score: 0</p>
     <button class="start">Start/Reset</button>
   </body>
