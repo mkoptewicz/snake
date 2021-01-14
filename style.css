@@ -1,3 +1,7 @@
+:root {
+  --green-primary: #9db340;
+  --green-secondary: #b9d853;
+}
 * {
   margin: 0;
   padding: 0;
@@ -27,13 +31,13 @@ h1 {
   height: 50px;
 }
 .snake {
- background-color: green;
+  background-color: green;
 }
 .apple {
- background-color: red;
+  background-color: red;
 }
 .start {
- margin-top: 3rem;
- padding: 1rem 2rem;
- font-size: 20px;
+  margin-top: 3rem;
+  padding: 1rem 2rem;
+  font-size: 20px;
 }
