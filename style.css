@@ -1,6 +1,8 @@
 :root {
-  --green-primary: #9db340;
-  --green-secondary: #b9d853;
+  --clr-green-primary: #9db340;
+  --clr-green-secondary: #b9d853;
+  --clr-light: #fbfdec;
+  --clr-dark: #020201;
   --size: 300px;
 }
 * {
@@ -9,15 +11,22 @@
   box-sizing: border-box;
 }
 body {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  min-height: 100vh;
+  max-height: 100vh;
+  text-align: center;
+  font-family: Roboto, sans-serif;
 }
 h1 {
-  margin: 5rem;
-  flex-basis: 100%;
+  margin-top: 2rem;
+  font-family: 'Henny Penny', cursive;
+  font-size: 6rem;
+}
+img {
+  max-width: 20vw;
+}
+.board-wrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 .container {
   display: flex;
@@ -26,25 +35,33 @@ h1 {
   height: var(--size);
   box-sizing: content-box;
 }
+.settings {
+  width: 20vw;
+  height: 50vh;
+  box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.2);
+}
 .cell {
   width: 30px;
   height: 30px;
-  border: 1px solid var(--green-secondary);
+  border: 1px solid var(--clr-green-secondary);
   border-radius: 5px;
 }
 .snake {
-  background-color: var(--green-primary);
+  background: linear-gradient(var(--clr-green-primary),var(--clr-green-secondary));
 }
 .apple {
   background-color: red;
 }
-.start {
-  margin-top: 3rem;
+button.start {
+  margin-top: 1rem;
   padding: 1rem 2rem;
-  font-size: 20px;
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  background: linear-gradient(45deg, var(--clr-green-primary),var(--clr-green-secondary));
 }
 .score {
-  margin-top: 2rem;
+  margin-top: 1rem;
   font-size: 2rem;
   font-weight: bold;
   opacity: 0;
